@@ -53,9 +53,7 @@ const Dashboard = () => {
         navigate('/create-user');
     };
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+  
 
     return (
         <div className="p-4">

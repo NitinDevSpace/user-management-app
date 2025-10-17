@@ -8,7 +8,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/create" element={<CreateUser />} />
+        <Route path="/create-user" element={<CreateUser />} />
         <Route path="/edit/:id" element={<EditUser />} />
       </Routes>
     </Router>

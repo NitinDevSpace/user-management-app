@@ -5,7 +5,7 @@ import { uploadImage } from '../utils/firebase';
 import api from '../api/api';
 
 const CreateUser = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
@@ -34,15 +34,17 @@ const CreateUser = () => {
                 <input
                     type="text"
                     placeholder="Name"
-                    {...register('name', { required: true })}
+                    {...register('name', { required: 'Name is required' })}
                     className="w-full p-2 border border-gray-300 rounded"
                 />
+                {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
                 <input
                     type="email"
                     placeholder="Email"
-                    {...register('email', { required: true })}
+                    {...register('email', { required: 'Email is required' })}
                     className="w-full p-2 border border-gray-300 rounded"
                 />
+                {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
                 <input
                     type="text"
                     placeholder="Phone"
@@ -51,9 +53,10 @@ const CreateUser = () => {
                 />
                 <input
                     type="date"
-                    {...register('dob', { required: true })}
+                    {...register('dob', { required: 'Date of birth is required' })}
                     className="w-full p-2 border border-gray-300 rounded"
                 />
+                {errors.dob && <p className="text-red-500 text-sm">{errors.dob.message}</p>}
                 <textarea
                     placeholder="Bio"
                     {...register('bio')}
