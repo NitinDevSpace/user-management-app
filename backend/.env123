@@ -1,4 +1,0 @@
-DATABASE_URL="postgresql://postgres.jydprrobdujqkuagzxlb:123456788@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
-PORT=4000
-FIREBASE_BUCKET="connect-sphere-b5188.firebasestorage.app"
-DIRECT_URL="postgresql://postgres.jydprrobdujqkuagzxlb:123456788@aws-1-ap-south-1.pooler.supabase.com:5432/postgres"
