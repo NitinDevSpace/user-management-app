@@ -3,8 +3,21 @@ import axios from '../api/api';
 import UserCardLandscape from '../components/UserCardLandscape';
 import { useNavigate } from 'react-router-dom';
 
+const hardcodedUsers = [
+    { id: 1, name: 'User One', isFollowing: false, followersCount: 10, imageUrl: '/demo.png' },
+    { id: 2, name: 'User Two', isFollowing: true, followersCount: 20, imageUrl: '/demo.png' },
+    { id: 3, name: 'User Three', isFollowing: false, followersCount: 5, imageUrl: '/demo.png' },
+    { id: 4, name: 'User Four', isFollowing: true, followersCount: 15, imageUrl: '/demo.png' },
+    { id: 5, name: 'User Five', isFollowing: false, followersCount: 8, imageUrl: '/demo.png' },
+    { id: 6, name: 'User Six', isFollowing: true, followersCount: 12, imageUrl: '/demo.png' },
+    { id: 7, name: 'User Seven', isFollowing: false, followersCount: 7, imageUrl: '/demo.png' },
+    { id: 8, name: 'User Eight', isFollowing: true, followersCount: 9, imageUrl: '/demo.png' },
+    { id: 9, name: 'User Nine', isFollowing: false, followersCount: 11, imageUrl: '/demo.png' },
+    { id: 10, name: 'User Ten', isFollowing: true, followersCount: 14, imageUrl: '/demo.png' },
+];
+
 const Dashboard = () => {
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState(hardcodedUsers);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -12,7 +25,20 @@ const Dashboard = () => {
         const fetchUsers = async () => {
             try {
                 const response = await axios.get('/users');
-                setUsers(response.data);
+                const fetchedUsers = response.data;
+
+                // Merge fetched users with hardcoded users without duplicates
+                const mergedUsersMap = new Map();
+                // Add hardcoded users first
+                hardcodedUsers.forEach(user => {
+                    mergedUsersMap.set(user.id, user);
+                });
+                // Add/overwrite with fetched users
+                fetchedUsers.forEach(user => {
+                    mergedUsersMap.set(user.id, user);
+                });
+
+                setUsers(Array.from(mergedUsersMap.values()));
             } catch (error) {
                 console.error('Error fetching users:', error);
             } finally {
